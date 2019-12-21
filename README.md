@@ -1,12 +1,12 @@
 # qLearning3
-Visualising qLearning. 
-
-Link: https://slooi.github.io/qLearning3/
+Visualising qLearning. Link: https://slooi.github.io/qLearning3/
 
 Keys:
+
 S - start
 
 A - agent
+
 
 Uses the following formula to update agent's QMatrix:
 (1-learningRate) * Q(s,a) + learningRate * [R(s,a) - movementCost + discount * MaxQVal(s',a)]
