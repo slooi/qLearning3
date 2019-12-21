@@ -18,6 +18,7 @@ discount = 0.8
 ## Update function
 
 The agent's QMatrix is updated using:
+
 (1-learningRate) * Q(s,a) + learningRate * [R(s,a) - movementCost + discount * MaxQVal(s',a)]
 
 ## How an action is chosen
