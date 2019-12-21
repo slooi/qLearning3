@@ -235,7 +235,3 @@ function render(){
 function round(num){
 	return Math.round(num*100)/100
 }
-
-
-
-// q(s,a) = (1-alpha)*Q(s,a) + alpha * (r + gamma * maxQ(s+1,a))
