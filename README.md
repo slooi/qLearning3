@@ -24,4 +24,4 @@ The agent's QMatrix is updated using:
 ## How an action is chosen
 The agent chooses a random action 50% of the time.
 
-The other 50% of the time, the agent uses its QMatrix to choose the best possible action given its current state 
+The other 50% of the time, the agent uses its QMatrix to choose the best possible action given its current state. In the event multiple actions have the same Qvalue / equally good, one of those actions are randomly selected.
