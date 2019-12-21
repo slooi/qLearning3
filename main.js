@@ -86,15 +86,12 @@ function updateState(state,action){
 	// Will move in direction if possible
 	const newState = new Array(2).fill(0)
 	const actionVec = actionIndexToVec(action)
-	// console.log('actionVec',actionVec)
 	newState[0] = state[0] + actionVec[0]
 	newState[1] = state[1] + actionVec[1]
 
 	if(checkStateInMap(newState,map)){
-		// console.log(1)
 		return newState
 	}
-	// console.log(2)
 	return state	
 }
 
