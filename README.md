@@ -1,5 +1,6 @@
 # qLearning3
-Visualising qLearning. https://slooi.github.io/qLearning3/
+Visualising qLearning. 
+Link: https://slooi.github.io/qLearning3/
 
 Keys:
 S - start
