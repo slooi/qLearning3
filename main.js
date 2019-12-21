@@ -8,13 +8,13 @@ const moveCost = 0.1
 // World
 // let rMatrix = [[0,0,0],[0,0,0],[0,0,0]]
 // Map which shows the reward if you land on that title
-let map = [
-	[0,		0,	0,	-1,	0],
-	[-1,	0,	0,	0,	0],
-	[0,		0,	0,	-1,	0],
-	[0,		-1,	-1,	-1,	0],
-	[0,		0,	0,	0,	10]
-]
+// let map = [
+// 	[0,		0,	0,	-1,	0],
+// 	[-1,	0,	0,	0,	0],
+// 	[0,		0,	0,	-1,	0],
+// 	[0,		-1,	-1,	-1,	0],
+// 	[0,		0,	0,	0,	10]
+// ]
 
 // World Information
 // let map = [
@@ -22,6 +22,11 @@ let map = [
 // 	[0,	-1],
 // 	[0, 10]
 // ]
+let map = [
+	[0,		0, -10, -10],
+	[-1,	-1, -10, -10],
+	[10, -1, -10, 100]
+]
 const spawn = {
 	x: 0,
 	y: 0
@@ -31,15 +36,6 @@ const spawn = {
 let qMatrix = createQMatrix(map,4)
 let state = [spawn.x,spawn.y]
 let reward = 0
-
-// Actions:
-/*
-	[delY, delX]
-	If trying to move in an invalid direction, no change in state
-*/
-
-// Create a map
-
 
 
 function createQMatrix(map,numOfActions){
@@ -55,16 +51,11 @@ function step(){
 	for(let i=0;i<1;i++){
 		// Determine action
 		const action = getAction(state)
-		// console.log('state',state)
-		// console.log('action',action)
 		// update state & get reward
 		const previousState = state
 		const feedbackRes = feedback(state,action)
 		state = feedbackRes[0]
 		reward = feedbackRes[1]
-		// console.log('new state',state)
-		// console.log('reward',reward)
-
 		// update qMatrix
 		updateQMatrix(qMatrix,previousState,state,action,reward)
 	}
@@ -72,15 +63,12 @@ function step(){
 
 function updateQMatrix(qMatrix,previousState,currentState,previousAction,r){
 	const preQVal = qMatrix[previousState[1]][previousState[0]][previousAction]
-	const qVals = qMatrix[previousState[1]][previousState[0]]
-	// console.log('BEFORE qVals',qVals)	
-	// console.log('BEFORE   preQVal,learningRate,r,discount,maxQ(qVals)', preQVal,learningRate,r,discount,maxQ(qVals))
-	qVals[previousAction] = (1 - learningRate) * preQVal + learningRate * (r - moveCost + discount * maxQ(qVals))
-	// console.log('AFTER qVals',qVals)
+	const preQVals = qMatrix[previousState[1]][previousState[0]]
+	const currentQVals = qMatrix[currentState[1]][currentState[0]]
+	preQVals[previousAction] = (1 - learningRate) * preQVal + learningRate * (r - moveCost + discount * maxQ(currentQVals))
 }
 
 function maxQ(qVals){
-	// console.log('qVals',qVals)
 	return qVals.reduce((holder,value)=>Math.max(holder,value))
 }
 
@@ -229,17 +217,23 @@ function initQTable(parent,map){
 }
 
 function setup(){
+	render()
+}
+setup()
 
+function tick(){
 	step()
+	render()
+}
+
+function render(){
 	const ul = document.getElementsByTagName('ul')[0]
 	const li = document.createElement('li')
 	ul.append(li)
 	initMapTable(li,map)
 	initQTable(li,qMatrix)
 	document.getElementsByClassName('end')[0].scrollIntoView()
-
 }
-setup()
 
 function round(num){
 	return Math.round(num*100)/100
