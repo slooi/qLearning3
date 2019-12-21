@@ -1,9 +1,11 @@
 # qLearning3
 Visualising qLearning. 
+
 Link: https://slooi.github.io/qLearning3/
 
 Keys:
 S - start
+
 A - agent
 
 Uses the following formula to update agent's QMatrix:
