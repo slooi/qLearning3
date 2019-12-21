@@ -21,6 +21,11 @@ The agent's QMatrix is updated using:
 
 (1-learningRate) * Q(s,a) + learningRate * [R(s,a) - movementCost + discount * MaxQVal(s',a)]
 
+## Actions
+The agent can only move in one direction at a time: up, down, left or right.
+
+The agent can not move outside the map
+
 ## How an action is chosen
 The agent chooses a random action 50% of the time.
 
